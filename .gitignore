@@ -1,0 +1,75 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build folders
+dist/
+build/
+out/
+
+# dotenv environment variables files
+.env
+.env.local
+.env.*.local
+
+# Debug files
+*.pid
+*.seed
+*.pid.lock
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+*.old
+
+# Cache folders
+.cache/
+.tmp/
+*.cache
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Compiled source #
+###################
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Package managers integrity files
+.package-lock.json
+.yarn-integrity
+.pnpm-debug.log
+
+# OS-specific
+ehthumbs.db
+Icon?
+$RECYCLE.BIN/
+
+# Misc
+*.log
+*.out
