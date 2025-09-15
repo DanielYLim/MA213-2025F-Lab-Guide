@@ -1,2 +1,2 @@
-# MA213_2025_Guide
-2025F MA213 Guide Website
+# MA213_2025_LabGuide
+2025F MA213 Lab Guide Website
