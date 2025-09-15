@@ -1,5 +1,0 @@
----
-title: "My Website"
----
-
-MA213 2025F Lab Guide Website
