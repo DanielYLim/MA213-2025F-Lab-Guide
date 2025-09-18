@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>MA213 Basic Statistics and Probability - Lab3 Guide</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MA213 Lab Guide</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Lab1_guide.html">Lab1</a>
+</li>
+<li>
+  <a href="Lab2_guide.html">Lab2</a>
+</li>
+<li>
+  <a href="Lab3_guide.html">Lab3</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">MA213 Basic Statistics and Probability -
+Lab3 Guide</h1>
+
+</div>
+
+
+<div id="lab-3-plotting-and-summaries" class="section level2">
+<h2><strong>Lab 3: Plotting and Summaries</strong></h2>
+<hr />
+</div>
+<div id="learning-objectives" class="section level2">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Classify and Analyze Variables: Categorize variables based on their
+types (e.g., numerical/categorical, continuous/discrete, ordinal),
+assess their association (positive, negative, or independent), and
+determine which make sense as explanatory vs. response variables.</li>
+<li>Use R for Data Management and Exploration: Utilize R to load,
+pre-process, and explore data through visualization and summarization
+techniques.</li>
+</ul>
+<hr />
+<div id="graphics-with-ggplot2-package" class="section level3">
+<h3>Graphics with <code>ggplot2</code> package</h3>
+<p>Plotting with <code>ggplot2</code> package begins with</p>
+<p><code>ggplot(data = df, aes(x=x_xvariable, y=y_variable))</code></p>
+<p>where</p>
+<p><code>df</code> : your dataframe name,</p>
+<p><code>aes()</code> : Aesthetics to define -&gt; specifying which
+variables are mapped to the x and y axes.</p>
+<p>and then you add <code>geoms</code> functions – geometrical objects
+as a graphical representation of the data in the plot (points, lines,
+bars). <strong><code>ggplot2</code></strong> offers many different
+geoms; We will use a few common ones today, including:</p>
+<ul>
+<li><p><code>geom_point()</code> : scatter plots, dot plots,
+etc.</p></li>
+<li><p><code>geom_line()</code> : trend lines, time-series,
+etc.</p></li>
+<li><p><code>geom_histogram()</code> : histograms</p></li>
+</ul>
+<p>In short,</p>
+<p><a
+href="https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf"><img
+src="Lab3/ggplot.jpg"
+alt="ggplot function overview (&lt;https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf&gt; )" /></a></p>
+</div>
+</div>
+<div id="plots-to-show-new-york-air-quality-data"
+class="section level1">
+<h1>Plots to show <strong>New York Air Quality Data</strong></h1>
+<p>We want to examine the shape of <code>Ozone</code> to see whether the
+data is symmetric, skewed or how the mean is centered and where…? Let’s
+see how this <code>Ozone</code> data is shaped by using several
+different methods.</p>
+<div id="import-the-data" class="section level2">
+<h2>Import the Data</h2>
+<pre class="r"><code>df = read.csv(&quot;Lab3/airquality.csv&quot;)</code></pre>
+</div>
+<div id="summary-of-ozone." class="section level2">
+<h2>1. Summary of <code>Ozone</code>.</h2>
+<pre class="r"><code>summary(df$Ozone)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##    1.00   18.00   31.50   42.13   63.25  168.00      37</code></pre>
+</div>
+<div id="stacked-dot-plot-of-ozone-." class="section level2">
+<h2>2. Stacked dot plot of <code>Ozone</code> .</h2>
+<pre class="r"><code>ggplot(data = df, aes(Ozone)) + 
+  geom_dotplot(binwidth = 5) # bins of width 5</code></pre>
+<pre><code>## Warning: Removed 37 rows containing missing values
+## or values outside the scale range
+## (`stat_bindot()`).</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="box-plot-of-ozone." class="section level2">
+<h2>3. Box plot of <code>Ozone</code>.</h2>
+<pre class="r"><code>ggplot(data=df, aes(Ozone)) +
+  geom_boxplot()</code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite
+## outside the scale range
+## (`stat_boxplot()`).</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>This shows that there are two suspected outliers.</p>
+</div>
+<div id="histogram-of-ozone-." class="section level2">
+<h2>4. Histogram of <code>Ozone</code> .</h2>
+<pre class="r"><code># ggplot version
+
+ggplot(data=df ) + 
+  geom_histogram(mapping=aes(Ozone), binwidth = 5) </code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite
+## outside the scale range (`stat_bin()`).</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="histogram-with-different-bin-option" class="section level2">
+<h2>5. Histogram with different bin option</h2>
+<p>by choosing how many observations in each bin
+(e.g. <code>bins=5</code> means each bin contains 5 observations).</p>
+<pre class="r"><code># bins = 5
+ggplot(data=df ) + geom_histogram(aes(Ozone), bins = 5)</code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite
+## outside the scale range (`stat_bin()`).</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code># bins = 30
+ggplot(data=df, aes(Ozone)) + 
+  geom_histogram(bins = 30) </code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite
+## outside the scale range (`stat_bin()`).</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+</div>
+<div id="labels-in-ggplot" class="section level2">
+<h2>6. Labels in ggplot</h2>
+<p>With
+<code>labs(x='x lable', y='y lable', title = 'name for your plot')</code>
+you can name your plot.</p>
+<pre class="r"><code>ggplot(data=df, aes(Ozone)) + 
+  geom_histogram(bins = 30, color=&#39;yellow&#39;) +
+  labs(x=&#39;Ozone Level&#39;, y=&#39;Count&#39;, title = &#39;Histogram with 30 bins&#39;)</code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite
+## outside the scale range (`stat_bin()`).</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="scatter-plot-of-ozone-and-temp-." class="section level2">
+<h2>7. Scatter plot of <code>Ozone</code> and <code>Temp</code> .</h2>
+<div
+id="we-want-to-examine-whether-there-is-a-relationship-between-ozone-and-temperature-both-numerical.-how-do-we-want-to-approach-this"
+class="section level3">
+<h3>We want to examine whether there is a relationship between ozone and
+temperature (both numerical). How do we want to approach this?</h3>
+<pre class="r"><code>ggplot(df) + geom_point(aes(x=Ozone, y=Temp)) + 
+  labs(title=&#39;Scatter plot of Ozone vs Temperature&#39;)</code></pre>
+<pre><code>## Warning: Removed 37 rows containing missing values
+## or values outside the scale range
+## (`geom_point()`).</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="titanic-data" class="section level1">
+<h1>Titanic Data</h1>
+<p>We are going to work with titanic data <code>titanic.csv</code>.
+Let’s import the data.</p>
+<pre class="r"><code># loading from csv file
+df &lt;- read.csv(&quot;Lab3/titanic.csv&quot;)
+glimpse(df)</code></pre>
+<pre><code>## Rows: 2,201
+## Columns: 5
+## $ X        &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18…
+## $ Class    &lt;chr&gt; &quot;3rd&quot;, &quot;3rd&quot;, &quot;3rd&quot;, &quot;3rd&quot;, &quot;3rd&quot;, &quot;3rd&quot;, &quot;3rd&quot;, &quot;3rd&quot;, &quot;3rd&quot;…
+## $ Sex      &lt;chr&gt; &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male…
+## $ Age      &lt;chr&gt; &quot;Child&quot;, &quot;Child&quot;, &quot;Child&quot;, &quot;Child&quot;, &quot;Child&quot;, &quot;Child&quot;, &quot;Child&quot;…
+## $ Survived &lt;chr&gt; &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;No&quot;, &quot;…</code></pre>
+<div id="barplot-for-survived" class="section level2">
+<h2>8. Barplot for <code>Survived</code></h2>
+<pre class="r"><code>new_df &lt;- df %&gt;% count(Survived)
+ggplot(new_df, aes(x = Survived, y=n)) +
+  geom_col() </code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="barplot-of-survived-and-class" class="section level2">
+<h2>9. Barplot of <code>Survived</code> and <code>Class</code></h2>
+<p>This shows summary table of <code>Survived</code> and
+<code>Class</code></p>
+<pre class="r"><code>df %&gt;% 
+  group_by(Survived, Class) %&gt;%
+  summarise(count=n()) </code></pre>
+<pre><code>## `summarise()` has grouped output by
+## &#39;Survived&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 8 × 3
+## # Groups:   Survived [2]
+##   Survived Class count
+##   &lt;chr&gt;    &lt;chr&gt; &lt;int&gt;
+## 1 No       1st     122
+## 2 No       2nd     167
+## 3 No       3rd     528
+## 4 No       Crew    673
+## 5 Yes      1st     203
+## 6 Yes      2nd     118
+## 7 Yes      3rd     178
+## 8 Yes      Crew    212</code></pre>
+<p>Adding <code>ggplot()</code> will turn it into barplot using
+<code>geom_col()</code></p>
+<pre class="r"><code>df %&gt;% 
+  group_by(Survived, Class) %&gt;%
+  summarise(count=n()) %&gt;%
+  ggplot(aes(x = factor(Survived), y=count, fill=factor(Class))) +
+  geom_col(position = &quot;fill&quot;) +  # position can be changed to &quot;dodge&quot;, &quot;stack&quot;, &quot;jitter&quot;, &quot;fill&quot;
+  labs(x=&quot;Survived&quot;)</code></pre>
+<pre><code>## `summarise()` has grouped output by
+## &#39;Survived&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre class="r"><code># for positioning in geom functions
+# https://ggplot2.tidyverse.org/reference/layer_positions.html</code></pre>
+</div>
+<div id="pie-chart-of-class" class="section level2">
+<h2>10. Pie chart of <code>Class</code></h2>
+<p>We need <code>table</code> class data first in order to show a pie
+chart</p>
+<pre class="r"><code># dplyr + ggplot
+
+table_data &lt;- df %&gt;% 
+  count(Class) %&gt;%
+  mutate(Class = factor(Class))
+
+table_data</code></pre>
+<pre><code>##   Class   n
+## 1   1st 325
+## 2   2nd 285
+## 3   3rd 706
+## 4  Crew 885</code></pre>
+<pre class="r"><code># alternate way using group_by() + summarise()
+
+table_data2 &lt;- df %&gt;% 
+  group_by(Class) %&gt;%
+  summarise(N = n())
+
+table_data2</code></pre>
+<pre><code>## # A tibble: 4 × 2
+##   Class     N
+##   &lt;chr&gt; &lt;int&gt;
+## 1 1st     325
+## 2 2nd     285
+## 3 3rd     706
+## 4 Crew    885</code></pre>
+<p>Using this <code>table</code> class object <code>table_data</code>,
+we obtain a pie chart.</p>
+<pre class="r"><code>ggplot(data = table_data, aes(x=&quot;&quot;, y=n, fill=Class)) +
+  geom_col() +
+  geom_text(aes(label = n), position = position_stack(vjust = 0.5)) + 
+  coord_polar(theta=&quot;y&quot;) +
+  theme_void()</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="r"><code># or simply 
+ggplot(data = table_data, aes(x=&quot;&quot;, y=n, fill=Class)) +
+  geom_col() + 
+  coord_polar(theta=&quot;y&quot;) +
+  theme_void()</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<pre class="r"><code># using table_data2
+ggplot(data = table_data2, aes(x=&quot;&quot;, y=N, fill=Class)) +
+  geom_col() + 
+  coord_polar(theta=&quot;y&quot;) +
+  theme_void()</code></pre>
+<p><img src="Lab3_guide_files/figure-html/unnamed-chunk-14-3.png" width="672" /></p>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTUEyMTMgQmFzaWMgU3RhdGlzdGljcyBhbmQgUHJvYmFiaWxpdHkgLSBMYWIzIEd1aWRlIgpsaW5rLWNpdGF0aW9uczogdHJ1ZQpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUgCiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0Ci0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKbGlicmFyeShnZ3Bsb3QyKQpsaWJyYXJ5KGRwbHlyKQpgYGAKCiMjICoqTGFiIDM6IFBsb3R0aW5nIGFuZCBTdW1tYXJpZXMqKgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIyBMZWFybmluZyBPYmplY3RpdmVzCgotICAgQ2xhc3NpZnkgYW5kIEFuYWx5emUgVmFyaWFibGVzOiBDYXRlZ29yaXplIHZhcmlhYmxlcyBiYXNlZCBvbiB0aGVpciB0eXBlcyAoZS5nLiwgbnVtZXJpY2FsL2NhdGVnb3JpY2FsLCBjb250aW51b3VzL2Rpc2NyZXRlLCBvcmRpbmFsKSwgYXNzZXNzIHRoZWlyIGFzc29jaWF0aW9uIChwb3NpdGl2ZSwgbmVnYXRpdmUsIG9yIGluZGVwZW5kZW50KSwgYW5kIGRldGVybWluZSB3aGljaCBtYWtlIHNlbnNlIGFzIGV4cGxhbmF0b3J5IHZzLiByZXNwb25zZSB2YXJpYWJsZXMuCi0gICBVc2UgUiBmb3IgRGF0YSBNYW5hZ2VtZW50IGFuZCBFeHBsb3JhdGlvbjogVXRpbGl6ZSBSIHRvIGxvYWQsIHByZS1wcm9jZXNzLCBhbmQgZXhwbG9yZSBkYXRhIHRocm91Z2ggdmlzdWFsaXphdGlvbiBhbmQgc3VtbWFyaXphdGlvbiB0ZWNobmlxdWVzLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIyMgR3JhcGhpY3Mgd2l0aCBgZ2dwbG90MmAgcGFja2FnZQoKUGxvdHRpbmcgd2l0aCBgZ2dwbG90MmAgcGFja2FnZSBiZWdpbnMgd2l0aAoKYGdncGxvdChkYXRhID0gZGYsIGFlcyh4PXhfeHZhcmlhYmxlLCB5PXlfdmFyaWFibGUpKWAKCndoZXJlCgpgZGZgIDogeW91ciBkYXRhZnJhbWUgbmFtZSwKCmBhZXMoKWAgOiBBZXN0aGV0aWNzIHRvIGRlZmluZSAtXD4gc3BlY2lmeWluZyB3aGljaCB2YXJpYWJsZXMgYXJlIG1hcHBlZCB0byB0aGUgeCBhbmQgeSBheGVzLgoKYW5kIHRoZW4geW91IGFkZCBgZ2VvbXNgIGZ1bmN0aW9ucyDigJMgZ2VvbWV0cmljYWwgb2JqZWN0cyBhcyBhIGdyYXBoaWNhbCByZXByZXNlbnRhdGlvbiBvZiB0aGUgZGF0YSBpbiB0aGUgcGxvdCAocG9pbnRzLCBsaW5lcywgYmFycykuICoqYGdncGxvdDJgKiogb2ZmZXJzIG1hbnkgZGlmZmVyZW50IGdlb21zOyBXZSB3aWxsIHVzZSBhIGZldyBjb21tb24gb25lcyB0b2RheSwgaW5jbHVkaW5nOgoKLSAgIGBnZW9tX3BvaW50KClgIDogc2NhdHRlciBwbG90cywgZG90IHBsb3RzLCBldGMuCgotICAgYGdlb21fbGluZSgpYCA6IHRyZW5kIGxpbmVzLCB0aW1lLXNlcmllcywgZXRjLgoKLSAgIGBnZW9tX2hpc3RvZ3JhbSgpYCA6IGhpc3RvZ3JhbXMKCkluIHNob3J0LAoKWyFbZ2dwbG90IGZ1bmN0aW9uIG92ZXJ2aWV3IChcPGh0dHBzOi8vZ2l0aHViLmNvbS9yc3R1ZGlvL2NoZWF0c2hlZXRzL2Jsb2IvbWFpbi9kYXRhLXZpc3VhbGl6YXRpb24ucGRmXD4gKV0oTGFiMy9nZ3Bsb3QuanBnKV0oaHR0cHM6Ly9naXRodWIuY29tL3JzdHVkaW8vY2hlYXRzaGVldHMvYmxvYi9tYWluL2RhdGEtdmlzdWFsaXphdGlvbi5wZGYpCgojIFBsb3RzIHRvIHNob3cgKipOZXcgWW9yayBBaXIgUXVhbGl0eSBEYXRhKioKCldlIHdhbnQgdG8gZXhhbWluZSB0aGUgc2hhcGUgb2YgYE96b25lYCB0byBzZWUgd2hldGhlciB0aGUgZGF0YSBpcyBzeW1tZXRyaWMsIHNrZXdlZCBvciBob3cgdGhlIG1lYW4gaXMgY2VudGVyZWQgYW5kIHdoZXJlLi4uPyBMZXQncyBzZWUgaG93IHRoaXMgYE96b25lYCBkYXRhIGlzIHNoYXBlZCBieSB1c2luZyBzZXZlcmFsIGRpZmZlcmVudCBtZXRob2RzLgoKIyMgSW1wb3J0IHRoZSBEYXRhCgpgYGB7ciwgZWNobz1UUlVFfQpkZiA9IHJlYWQuY3N2KCJMYWIzL2FpcnF1YWxpdHkuY3N2IikKYGBgCgojIyAxLiBTdW1tYXJ5IG9mIGBPem9uZWAuCgpgYGB7ciwgZWNobz1UUlVFfQoKc3VtbWFyeShkZiRPem9uZSkKYGBgCgojIyAyLiBTdGFja2VkIGRvdCBwbG90IG9mIGBPem9uZWAgLgoKYGBge3IsIGVjaG89VFJVRX0KZ2dwbG90KGRhdGEgPSBkZiwgYWVzKE96b25lKSkgKyAKICBnZW9tX2RvdHBsb3QoYmlud2lkdGggPSA1KSAjIGJpbnMgb2Ygd2lkdGggNQoKYGBgCgojIyAzLiBCb3ggcGxvdCBvZiBgT3pvbmVgLgoKYGBge3IsIGVjaG89VFJVRX0KZ2dwbG90KGRhdGE9ZGYsIGFlcyhPem9uZSkpICsKICBnZW9tX2JveHBsb3QoKQoKYGBgCgpUaGlzIHNob3dzIHRoYXQgdGhlcmUgYXJlIHR3byBzdXNwZWN0ZWQgb3V0bGllcnMuCgojIyA0LiBIaXN0b2dyYW0gb2YgYE96b25lYCAuCgpgYGB7ciwgZWNobz1UUlVFfQojIGdncGxvdCB2ZXJzaW9uCgpnZ3Bsb3QoZGF0YT1kZiApICsgCiAgZ2VvbV9oaXN0b2dyYW0obWFwcGluZz1hZXMoT3pvbmUpLCBiaW53aWR0aCA9IDUpIAogIAoKYGBgCgojIyA1LiBIaXN0b2dyYW0gd2l0aCBkaWZmZXJlbnQgYmluIG9wdGlvbgoKYnkgY2hvb3NpbmcgaG93IG1hbnkgb2JzZXJ2YXRpb25zIGluIGVhY2ggYmluIChlLmcuIGBiaW5zPTVgIG1lYW5zIGVhY2ggYmluIGNvbnRhaW5zIDUgb2JzZXJ2YXRpb25zKS4KCmBgYHtyLCBlY2hvPVRSVUV9CgoKIyBiaW5zID0gNQpnZ3Bsb3QoZGF0YT1kZiApICsgZ2VvbV9oaXN0b2dyYW0oYWVzKE96b25lKSwgYmlucyA9IDUpCgojIGJpbnMgPSAzMApnZ3Bsb3QoZGF0YT1kZiwgYWVzKE96b25lKSkgKyAKICBnZW9tX2hpc3RvZ3JhbShiaW5zID0gMzApIAoKCmBgYAoKIyMgNi4gTGFiZWxzIGluIGdncGxvdAoKV2l0aCBgbGFicyh4PSd4IGxhYmxlJywgeT0neSBsYWJsZScsIHRpdGxlID0gJ25hbWUgZm9yIHlvdXIgcGxvdCcpYCB5b3UgY2FuIG5hbWUgeW91ciBwbG90LgoKYGBge3IsIGVjaG89VFJVRX0KCgoKZ2dwbG90KGRhdGE9ZGYsIGFlcyhPem9uZSkpICsgCiAgZ2VvbV9oaXN0b2dyYW0oYmlucyA9IDMwLCBjb2xvcj0neWVsbG93JykgKwogIGxhYnMoeD0nT3pvbmUgTGV2ZWwnLCB5PSdDb3VudCcsIHRpdGxlID0gJ0hpc3RvZ3JhbSB3aXRoIDMwIGJpbnMnKQoKCmBgYAoKIyMgNy4gU2NhdHRlciBwbG90IG9mIGBPem9uZWAgYW5kIGBUZW1wYCAuCgojIyMgV2Ugd2FudCB0byBleGFtaW5lIHdoZXRoZXIgdGhlcmUgaXMgYSByZWxhdGlvbnNoaXAgYmV0d2VlbiBvem9uZSBhbmQgdGVtcGVyYXR1cmUgKGJvdGggbnVtZXJpY2FsKS4gSG93IGRvIHdlIHdhbnQgdG8gYXBwcm9hY2ggdGhpcz8KCmBgYHtyLCBlY2hvPVRSVUV9CgpnZ3Bsb3QoZGYpICsgZ2VvbV9wb2ludChhZXMoeD1Pem9uZSwgeT1UZW1wKSkgKyAKICBsYWJzKHRpdGxlPSdTY2F0dGVyIHBsb3Qgb2YgT3pvbmUgdnMgVGVtcGVyYXR1cmUnKQoKCmBgYAoKIyBUaXRhbmljIERhdGEKCldlIGFyZSBnb2luZyB0byB3b3JrIHdpdGggdGl0YW5pYyBkYXRhIGB0aXRhbmljLmNzdmAuIExldCdzIGltcG9ydCB0aGUgZGF0YS4KCmBgYHtyLCBlY2hvPVRSVUV9CiMgbG9hZGluZyBmcm9tIGNzdiBmaWxlCmRmIDwtIHJlYWQuY3N2KCJMYWIzL3RpdGFuaWMuY3N2IikKZ2xpbXBzZShkZikKCgpgYGAKCiMjIDguIEJhcnBsb3QgZm9yIGBTdXJ2aXZlZGAKCmBgYHtyLCBlY2hvPVRSVUV9CgpuZXdfZGYgPC0gZGYgJT4lIGNvdW50KFN1cnZpdmVkKQpnZ3Bsb3QobmV3X2RmLCBhZXMoeCA9IFN1cnZpdmVkLCB5PW4pKSArCiAgZ2VvbV9jb2woKSAKCgpgYGAKCiMjIDkuIEJhcnBsb3Qgb2YgYFN1cnZpdmVkYCBhbmQgYENsYXNzYAoKVGhpcyBzaG93cyBzdW1tYXJ5IHRhYmxlIG9mIGBTdXJ2aXZlZGAgYW5kIGBDbGFzc2AKCmBgYHtyLCBlY2hvPVRSVUV9CgpkZiAlPiUgCiAgZ3JvdXBfYnkoU3Vydml2ZWQsIENsYXNzKSAlPiUKICBzdW1tYXJpc2UoY291bnQ9bigpKSAKCmBgYAoKQWRkaW5nIGBnZ3Bsb3QoKWAgd2lsbCB0dXJuIGl0IGludG8gYmFycGxvdCB1c2luZyBgZ2VvbV9jb2woKWAKCmBgYHtyLCBlY2hvPVRSVUV9CgpkZiAlPiUgCiAgZ3JvdXBfYnkoU3Vydml2ZWQsIENsYXNzKSAlPiUKICBzdW1tYXJpc2UoY291bnQ9bigpKSAlPiUKICBnZ3Bsb3QoYWVzKHggPSBmYWN0b3IoU3Vydml2ZWQpLCB5PWNvdW50LCBmaWxsPWZhY3RvcihDbGFzcykpKSArCiAgZ2VvbV9jb2wocG9zaXRpb24gPSAiZmlsbCIpICsgICMgcG9zaXRpb24gY2FuIGJlIGNoYW5nZWQgdG8gImRvZGdlIiwgInN0YWNrIiwgImppdHRlciIsICJmaWxsIgogIGxhYnMoeD0iU3Vydml2ZWQiKQoKIyBmb3IgcG9zaXRpb25pbmcgaW4gZ2VvbSBmdW5jdGlvbnMKIyBodHRwczovL2dncGxvdDIudGlkeXZlcnNlLm9yZy9yZWZlcmVuY2UvbGF5ZXJfcG9zaXRpb25zLmh0bWwKCgpgYGAKCiMjIDEwLiBQaWUgY2hhcnQgb2YgYENsYXNzYAoKV2UgbmVlZCBgdGFibGVgIGNsYXNzIGRhdGEgZmlyc3QgaW4gb3JkZXIgdG8gc2hvdyBhIHBpZSBjaGFydAoKYGBge3IsIGVjaG89VFJVRX0KCgojIGRwbHlyICsgZ2dwbG90Cgp0YWJsZV9kYXRhIDwtIGRmICU+JSAKICBjb3VudChDbGFzcykgJT4lCiAgbXV0YXRlKENsYXNzID0gZmFjdG9yKENsYXNzKSkKCnRhYmxlX2RhdGEKCiMgYWx0ZXJuYXRlIHdheSB1c2luZyBncm91cF9ieSgpICsgc3VtbWFyaXNlKCkKCnRhYmxlX2RhdGEyIDwtIGRmICU+JSAKICBncm91cF9ieShDbGFzcykgJT4lCiAgc3VtbWFyaXNlKE4gPSBuKCkpCgp0YWJsZV9kYXRhMgoKCmBgYAoKVXNpbmcgdGhpcyBgdGFibGVgIGNsYXNzIG9iamVjdCBgdGFibGVfZGF0YWAsIHdlIG9idGFpbiBhIHBpZSBjaGFydC4KCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IHRhYmxlX2RhdGEsIGFlcyh4PSIiLCB5PW4sIGZpbGw9Q2xhc3MpKSArCiAgZ2VvbV9jb2woKSArCiAgZ2VvbV90ZXh0KGFlcyhsYWJlbCA9IG4pLCBwb3NpdGlvbiA9IHBvc2l0aW9uX3N0YWNrKHZqdXN0ID0gMC41KSkgKyAKICBjb29yZF9wb2xhcih0aGV0YT0ieSIpICsKICB0aGVtZV92b2lkKCkKCiMgb3Igc2ltcGx5IApnZ3Bsb3QoZGF0YSA9IHRhYmxlX2RhdGEsIGFlcyh4PSIiLCB5PW4sIGZpbGw9Q2xhc3MpKSArCiAgZ2VvbV9jb2woKSArIAogIGNvb3JkX3BvbGFyKHRoZXRhPSJ5IikgKwogIHRoZW1lX3ZvaWQoKQoKCiMgdXNpbmcgdGFibGVfZGF0YTIKZ2dwbG90KGRhdGEgPSB0YWJsZV9kYXRhMiwgYWVzKHg9IiIsIHk9TiwgZmlsbD1DbGFzcykpICsKICBnZW9tX2NvbCgpICsgCiAgY29vcmRfcG9sYXIodGhldGE9InkiKSArCiAgdGhlbWVfdm9pZCgpCmBgYAo=</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Lab3_guide.Rmd");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

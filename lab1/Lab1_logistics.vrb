@@ -1,0 +1,25 @@
+\frametitle{GenAI Bad Examples}
+	Question : Import ``mtcars.csv'' to the variable carsdata. \\
+	Create a new variable subdata containing only the data for automatic transmission cars with weight over 3000 lbs.
+	
+	Your Prompt:
+	\begin{scriptsize}
+	\begin{verbatim}
+	Import mtcars.csv to the variable carsdata.
+	Create a new variable subdata containing only the data for automatic
+	transmission cars with weight over 3000 lbs.
+	\end{verbatim}
+	\end{scriptsize}
+	GenAI Response:
+	
+	\begin{scriptsize}
+		\begin{verbatim}
+		# Import mtcars.csv into the variable carsdata
+	carsdata <- read.csv("mtcars.csv")
+
+	# Create subdata with automatic transmission cars (am == 0)
+	# and weight over 3000 lbs (wt > 3.0)
+subdata <- subset(carsdata, am == 0 & wt > 3.0)
+
+		\end{verbatim}
+	\end{scriptsize}
