@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>MA213 Basic Statistics and Probability - Lab4 guide</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MA213 Lab Guide</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Lab1_guide.html">Lab1</a>
+</li>
+<li>
+  <a href="Lab2_guide.html">Lab2</a>
+</li>
+<li>
+  <a href="Lab3_guide.html">Lab3</a>
+</li>
+<li>
+  <a href="Lab4_guide.html">Lab4</a>
+</li>
+<li>
+  <a href="Lab4_guide2.html">Hypothesis Testing Using Simulation (Lab4)</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">MA213 Basic Statistics and Probability -
+Lab4 guide</h1>
+
+</div>
+
+
+<div id="lab-4-simulation-and-probability-r-guide"
+class="section level2">
+<h2>Lab 4: Simulation and Probability R guide</h2>
+<hr />
+</div>
+<div id="learning-objectives" class="section level2">
+<h2>Learning Objectives</h2>
+<ul>
+<li><p>Validate and Explain Probability Distributions: Assess the
+validity of a probability distribution using the concepts of outcome,
+sample space, and probability properties (e.g., disjoint outcomes,
+probabilities between 0 and 1, and total probabilities summing to
+1).</p></li>
+<li><p>Compute Probabilities Using Various Tools: Use logic, Venn
+diagrams, and probability rules to compute probabilities for
+events.</p></li>
+<li><p>Understand and Compute Expectations and Variances: Explain the
+concepts of expectations and variances of random variables, and compute
+the expectation and variance of a linear combination of random
+variables.</p></li>
+<li><p>Conduct Hypothesis Testing Using Simulation: Set up null and
+alternative hypotheses to test for independence between variables, and
+use simulation techniques to evaluate data support for these
+hypotheses.</p></li>
+</ul>
+</div>
+<div id="how-do-you-roll-a-die-using-r" class="section level2">
+<h2>How do you roll a die using R?</h2>
+<p><code>sample()</code> will randomly sample <code>size</code> many
+sample from the vector <code>x</code></p>
+<p><code>sample(x, size, replace = FALSE, prob = NULL)</code></p>
+<pre class="r"><code># example
+x &lt;- c(&quot;apple&quot;, &quot;pear&quot;, &quot;strawberry&quot;, &quot;orange&quot;, &quot;lemon&quot;)
+
+sample(x, 3) # picks 3 unique fruits from the vector (without replacement)</code></pre>
+<pre><code>## [1] &quot;strawberry&quot; &quot;orange&quot;     &quot;apple&quot;</code></pre>
+<pre class="r"><code>sample(x, 10, replace=TRUE) # picks 10 fruits, allowing repeats (sampling with replacement)</code></pre>
+<pre><code>##  [1] &quot;strawberry&quot; &quot;orange&quot;     &quot;lemon&quot;      &quot;lemon&quot;      &quot;pear&quot;      
+##  [6] &quot;lemon&quot;      &quot;orange&quot;     &quot;apple&quot;      &quot;strawberry&quot; &quot;apple&quot;</code></pre>
+<div id="exercise-lets-make-a-die-a-vector-of-size-6-and-roll-once."
+class="section level3">
+<h3>Exercise : Let’s make a die (a vector of size 6) and roll once.</h3>
+<pre class="r"><code>#
+#
+#</code></pre>
+</div>
+</div>
+<div id="loops" class="section level2">
+<h2>Loops</h2>
+<p>Loops repeatedly execute a block of code for various elements.</p>
+<pre class="r"><code># Example: Print numbers from 1 to 5
+print(&quot;Example1 &quot;)</code></pre>
+<pre><code>## [1] &quot;Example1 &quot;</code></pre>
+<pre class="r"><code>for (i in 1:5) {
+  print(i)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5</code></pre>
+<pre class="r"><code># Example 2: Print numbers from 1 to 5
+print(&quot;Example2 &quot;)</code></pre>
+<pre><code>## [1] &quot;Example2 &quot;</code></pre>
+<pre class="r"><code>for (i in c(1,2,3,4,5)) {
+  print(i)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5</code></pre>
+<pre class="r"><code># Example3: Simulate rolling a die 5 times and record it
+print(&quot;Example3 &quot;)</code></pre>
+<pre><code>## [1] &quot;Example3 &quot;</code></pre>
+<pre class="r"><code>rolls &lt;- rep(0, 5) # Initialize a vector of length 5 with zeros to store roll results
+for (i in 1:5) {
+  rolls[i] &lt;- sample(1:6, 1)   # Sample one number between 1 and 6 and assign it to the i-th position
+}
+rolls</code></pre>
+<pre><code>## [1] 3 3 1 4 5</code></pre>
+<div
+id="exercise-lets-make-a-coin-a-vector-of-size-2-and-flip-it-10-times-and-record-them."
+class="section level3">
+<h3>Exercise : Let’s make a coin (a vector of size 2) and flip it 10
+times and record them.</h3>
+<pre class="r"><code>#
+#
+#</code></pre>
+</div>
+</div>
+<div id="function" class="section level2">
+<h2>Function</h2>
+<p>Functions allow you to encapsulate reusable blocks of code and
+parameters.</p>
+<pre class="r"><code># Example: Function to calculate (a+b)^2
+square &lt;- function(a, b) {
+  value = (a + b)^2  # Calculate the square of the sum of a and b
+  return(value)      # Return the calculated value
+}
+square(1,2) # Output: 9</code></pre>
+<pre><code>## [1] 9</code></pre>
+<pre class="r"><code>square(2,3) # Output: 25</code></pre>
+<pre><code>## [1] 25</code></pre>
+<div
+id="exercise-make-a-function-to-calculate-the-multiplication-of-the-three-numbers"
+class="section level3">
+<h3>Exercise : Make a function to calculate the multiplication of the
+three numbers</h3>
+<pre class="r"><code># what should be inputs?
+# what is the output? </code></pre>
+</div>
+</div>
+<div id="function-loop" class="section level2">
+<h2>Function + Loop</h2>
+<p>Combine loops and functions for repeated tasks.</p>
+<pre class="r"><code># Example: Roll a die 5 times using a loop within a function
+roll_multiple &lt;- function(runs) {
+  rolls &lt;- rep(0, runs) # create rolls vector of 0
+ 
+   for (i in 1:runs) {
+    rolls[i] &lt;- sample(1:6, 1)
+  }
+  
+  return(rolls)
+}
+roll_multiple(5)</code></pre>
+<pre><code>## [1] 4 5 2 6 4</code></pre>
+</div>
+<div id="lets-roll-one-dice-and-show-the-output."
+class="section level2">
+<h2>Let’s roll one dice and show the output.</h2>
+<pre class="r"><code>#Outcome from those two dice
+
+dice1 &lt;- sample(1:6, 1)
+dice2 &lt;- sample(1:6, 1)
+
+sum_of_two &lt;- dice1 + dice2
+sum_of_two</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div
+id="using-for-loop-assign-outcome-of-two-dice-rolled-into-myoutcome-from-100-iterations."
+class="section level2">
+<h2>Using <code>for loop</code>, assign outcome of two dice rolled into
+<code>myoutcome</code> from 100 iterations.</h2>
+<pre class="r"><code>myoutcome = rep(0, 100) # make a vector of size 100 that has all zero&#39;s
+
+for (i in 1:100){
+  dice1 &lt;- sample(1:6, 1)
+  dice2 &lt;- sample(1:6, 1)
+  sum_of_two &lt;- dice1 + dice2
+  myoutcome[i] &lt;- sum_of_two
+}
+
+head(myoutcome) # print first 6 entries</code></pre>
+<pre><code>## [1] 11 10  6 10  2  8</code></pre>
+</div>
+<div
+id="use-replicate-it-carries-out-repeated-tasks-in-a-more-computationally-efficient-way."
+class="section level2">
+<h2>Use <code>replicate()</code>, it carries out repeated tasks in a
+more computationally efficient way.</h2>
+<pre class="r"><code>twodice_outcome &lt;- function(){
+  dice1 &lt;- sample(1:6, 1)
+  dice2 &lt;- sample(1:6, 1)
+  
+  sum_of_two &lt;- dice1 + dice2
+  myoutcome &lt;- sum_of_two
+  
+  return(myoutcome)
+}
+twodice_outcome() # this function works as one simulation run</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>myoutcome &lt;- replicate(n=30, twodice_outcome()) # 10 runs
+myoutcome</code></pre>
+<pre><code>##  [1]  7 11  5 11  6 10  5  6  7  7  8  5  5 11  8  2  6  8  6  8  2  4  7 10 10
+## [26]  8  4 12  4  4</code></pre>
+</div>
+<div id="calculate-probability-of-each-outcome." class="section level2">
+<h2>Calculate probability of each outcome.</h2>
+<pre class="r"><code># for loop version (clasic)
+n = 30 # assign 30 for rolling times
+myoutcome &lt;- rep(0, n) #initialize empty vector or size n
+for (i in 1:n){
+  myoutcome[i] &lt;- twodice_outcome() # store each outcome to ith entry in myoutcome vector
+}
+myoutcome # print out myoutcome</code></pre>
+<pre><code>##  [1]  4 12  5  4  6  9  3 12 10  6  7  7  3  6  7 10  8  7 10  8  6  4 10  3  7
+## [26]  3  6  6 10  6</code></pre>
+<pre class="r"><code>outcome_table &lt;- table(myoutcome)
+n &lt;- length(myoutcome) # this length function will count how many unique output you have. 
+prob_outcome &lt;- outcome_table/n # to calculate each probability, you divide each frequency by the total number of observation n
+prob_outcome </code></pre>
+<pre><code>## myoutcome
+##          3          4          5          6          7          8          9 
+## 0.13333333 0.10000000 0.03333333 0.23333333 0.16666667 0.06666667 0.03333333 
+##         10         12 
+## 0.16666667 0.06666667</code></pre>
+<pre class="r"><code># replicate version (faster but little challenging)
+myoutcome &lt;- replicate(n=30, twodice_outcome())
+outcome_table &lt;- table(myoutcome)
+n &lt;- length(myoutcome)
+prob_outcome &lt;- outcome_table/n
+prob_outcome </code></pre>
+<pre><code>## myoutcome
+##          2          3          4          6          7          8          9 
+## 0.06666667 0.06666667 0.13333333 0.23333333 0.13333333 0.13333333 0.06666667 
+##         10         11         12 
+## 0.03333333 0.10000000 0.03333333</code></pre>
+<pre class="r"><code># how to ensure that it is proper probability? 
+sum(prob_outcome) # it needs to add up to 1</code></pre>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="calculate-the-simulated-expected-value-of-the-random-variable."
+class="section level2">
+<h2>Calculate the simulated expected value of the random variable.</h2>
+<pre class="r"><code>outcome_table * prob_outcome</code></pre>
+<pre><code>## myoutcome
+##          2          3          4          6          7          8          9 
+## 0.13333333 0.13333333 0.53333333 1.63333333 0.53333333 0.53333333 0.13333333 
+##         10         11         12 
+## 0.03333333 0.30000000 0.03333333</code></pre>
+<pre class="r"><code>names(outcome_table) # we need this</code></pre>
+<pre><code>##  [1] &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot;</code></pre>
+<pre class="r"><code>values &lt;- as.numeric(names(outcome_table) ) 
+
+# or
+# values &lt;- 2:12 
+
+sum(values * prob_outcome)</code></pre>
+<pre><code>## [1] 6.7</code></pre>
+<pre class="r"><code>mu_hat = sum(values * prob_outcome)
+
+mu_hat</code></pre>
+<pre><code>## [1] 6.7</code></pre>
+</div>
+<div id="calculate-the-simulated-variance-of-the-random-variable."
+class="section level2">
+<h2>Calculate the simulated variance of the random variable.</h2>
+<pre class="r"><code>sigma_2_hat &lt;- sum( (values-mu_hat)^2 * prob_outcome  )
+sigma_2_hat</code></pre>
+<pre><code>## [1] 7.21</code></pre>
+</div>
+<div
+id="make-a-function-that-has-an-input-n-and-a-list-of-output-that-gives-you-the-simulated-expected-value-and-variance.-putting-all-together"
+class="section level2">
+<h2>Make a function that has an input <code>n</code> and a list of
+output that gives you the simulated expected value and variance.
+(putting all together)</h2>
+<pre class="r"><code>sim_fn &lt;- function(n=1000){
+ myoutcome = rep(0, n)
+
+  for (i in 1:n){
+    dice1 &lt;- sample(1:6, 1)
+    dice2 &lt;- sample(1:6, 1)
+    sum_of_two &lt;- dice1 + dice2
+    myoutcome[i] &lt;- sum_of_two
+  }
+
+  outcome_table &lt;- table(myoutcome)
+  
+  prob_outcome &lt;- outcome_table/n
+
+  values &lt;- as.numeric(names(outcome_table) ) # it takes out the each column name and make it as numeric type value and assign it to values variable
+
+
+  mu_hat = sum(values * prob_outcome)
+
+  sigma_2_hat &lt;- sum( (values-mu_hat)^2 * prob_outcome  )
+  output &lt;- list(mu = mu_hat, sigma2 = sigma_2_hat) # list output
+  # output &lt;- c(mu_hat, sigma_2_hat) # vector output
+  return(output)
+}
+
+
+sim_fn(100)</code></pre>
+<pre><code>## $mu
+## [1] 7.08
+## 
+## $sigma2
+## [1] 5.9136</code></pre>
+<pre class="r"><code>sim_fn(1000)</code></pre>
+<pre><code>## $mu
+## [1] 7.001
+## 
+## $sigma2
+## [1] 6.276999</code></pre>
+<pre class="r"><code>sim_fn(10000)</code></pre>
+<pre><code>## $mu
+## [1] 6.9903
+## 
+## $sigma2
+## [1] 5.951006</code></pre>
+<pre class="r"><code>sim_fn(100000)</code></pre>
+<pre><code>## $mu
+## [1] 6.9969
+## 
+## $sigma2
+## [1] 5.81581</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

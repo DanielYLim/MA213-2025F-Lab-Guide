@@ -264,6 +264,12 @@ $(document).ready(function () {
 <li>
   <a href="Lab3_guide.html">Lab3</a>
 </li>
+<li>
+  <a href="Lab4_guide.html">Lab4</a>
+</li>
+<li>
+  <a href="Lab4_guide2.html">Hypothesis Testing Using Simulation (Lab4)</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -352,17 +358,15 @@ different methods.</p>
 <h2>2. Stacked dot plot of <code>Ozone</code> .</h2>
 <pre class="r"><code>ggplot(data = df, aes(Ozone)) + 
   geom_dotplot(binwidth = 5) # bins of width 5</code></pre>
-<pre><code>## Warning: Removed 37 rows containing missing values
-## or values outside the scale range
-## (`stat_bindot()`).</code></pre>
+<pre><code>## Warning: Removed 37 rows containing missing values or values outside the scale
+## range (`stat_bindot()`).</code></pre>
 <p><img src="Lab3_guide_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="box-plot-of-ozone." class="section level2">
 <h2>3. Box plot of <code>Ozone</code>.</h2>
 <pre class="r"><code>ggplot(data=df, aes(Ozone)) +
   geom_boxplot()</code></pre>
-<pre><code>## Warning: Removed 37 rows containing non-finite
-## outside the scale range
+<pre><code>## Warning: Removed 37 rows containing non-finite outside the scale range
 ## (`stat_boxplot()`).</code></pre>
 <p><img src="Lab3_guide_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>This shows that there are two suspected outliers.</p>
@@ -373,8 +377,8 @@ different methods.</p>
 
 ggplot(data=df ) + 
   geom_histogram(mapping=aes(Ozone), binwidth = 5) </code></pre>
-<pre><code>## Warning: Removed 37 rows containing non-finite
-## outside the scale range (`stat_bin()`).</code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
 <p><img src="Lab3_guide_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="histogram-with-different-bin-option" class="section level2">
@@ -383,14 +387,14 @@ ggplot(data=df ) +
 (e.g. <code>bins=5</code> means each bin contains 5 observations).</p>
 <pre class="r"><code># bins = 5
 ggplot(data=df ) + geom_histogram(aes(Ozone), bins = 5)</code></pre>
-<pre><code>## Warning: Removed 37 rows containing non-finite
-## outside the scale range (`stat_bin()`).</code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
 <p><img src="Lab3_guide_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code># bins = 30
 ggplot(data=df, aes(Ozone)) + 
   geom_histogram(bins = 30) </code></pre>
-<pre><code>## Warning: Removed 37 rows containing non-finite
-## outside the scale range (`stat_bin()`).</code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
 <p><img src="Lab3_guide_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 </div>
 <div id="labels-in-ggplot" class="section level2">
@@ -401,8 +405,8 @@ you can name your plot.</p>
 <pre class="r"><code>ggplot(data=df, aes(Ozone)) + 
   geom_histogram(bins = 30, color=&#39;yellow&#39;) +
   labs(x=&#39;Ozone Level&#39;, y=&#39;Count&#39;, title = &#39;Histogram with 30 bins&#39;)</code></pre>
-<pre><code>## Warning: Removed 37 rows containing non-finite
-## outside the scale range (`stat_bin()`).</code></pre>
+<pre><code>## Warning: Removed 37 rows containing non-finite outside the scale range
+## (`stat_bin()`).</code></pre>
 <p><img src="Lab3_guide_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="scatter-plot-of-ozone-and-temp-." class="section level2">
@@ -414,9 +418,8 @@ class="section level3">
 temperature (both numerical). How do we want to approach this?</h3>
 <pre class="r"><code>ggplot(df) + geom_point(aes(x=Ozone, y=Temp)) + 
   labs(title=&#39;Scatter plot of Ozone vs Temperature&#39;)</code></pre>
-<pre><code>## Warning: Removed 37 rows containing missing values
-## or values outside the scale range
-## (`geom_point()`).</code></pre>
+<pre><code>## Warning: Removed 37 rows containing missing values or values outside the scale
+## range (`geom_point()`).</code></pre>
 <p><img src="Lab3_guide_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 </div>
@@ -449,8 +452,7 @@ ggplot(new_df, aes(x = Survived, y=n)) +
 <pre class="r"><code>df %&gt;% 
   group_by(Survived, Class) %&gt;%
   summarise(count=n()) </code></pre>
-<pre><code>## `summarise()` has grouped output by
-## &#39;Survived&#39;. You can override using the
+<pre><code>## `summarise()` has grouped output by &#39;Survived&#39;. You can override using the
 ## `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 8 × 3
 ## # Groups:   Survived [2]
@@ -472,8 +474,7 @@ ggplot(new_df, aes(x = Survived, y=n)) +
   ggplot(aes(x = factor(Survived), y=count, fill=factor(Class))) +
   geom_col(position = &quot;fill&quot;) +  # position can be changed to &quot;dodge&quot;, &quot;stack&quot;, &quot;jitter&quot;, &quot;fill&quot;
   labs(x=&quot;Survived&quot;)</code></pre>
-<pre><code>## `summarise()` has grouped output by
-## &#39;Survived&#39;. You can override using the
+<pre><code>## `summarise()` has grouped output by &#39;Survived&#39;. You can override using the
 ## `.groups` argument.</code></pre>
 <p><img src="Lab3_guide_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <pre class="r"><code># for positioning in geom functions
