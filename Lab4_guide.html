@@ -313,10 +313,10 @@ sample from the vector <code>x</code></p>
 x &lt;- c(&quot;apple&quot;, &quot;pear&quot;, &quot;strawberry&quot;, &quot;orange&quot;, &quot;lemon&quot;)
 
 sample(x, 3) # picks 3 unique fruits from the vector (without replacement)</code></pre>
-<pre><code>## [1] &quot;orange&quot;     &quot;apple&quot;      &quot;strawberry&quot;</code></pre>
+<pre><code>## [1] &quot;orange&quot;     &quot;strawberry&quot; &quot;pear&quot;</code></pre>
 <pre class="r"><code>sample(x, 10, replace=TRUE) # picks 10 fruits, allowing repeats (sampling with replacement)</code></pre>
-<pre><code>##  [1] &quot;orange&quot;     &quot;lemon&quot;      &quot;lemon&quot;      &quot;orange&quot;     &quot;orange&quot;    
-##  [6] &quot;orange&quot;     &quot;strawberry&quot; &quot;apple&quot;      &quot;lemon&quot;      &quot;orange&quot;</code></pre>
+<pre><code>##  [1] &quot;apple&quot;      &quot;strawberry&quot; &quot;lemon&quot;      &quot;pear&quot;       &quot;apple&quot;     
+##  [6] &quot;strawberry&quot; &quot;strawberry&quot; &quot;apple&quot;      &quot;pear&quot;       &quot;orange&quot;</code></pre>
 <div id="exercise-lets-make-a-die-a-vector-of-size-6-and-roll-once."
 class="section level3">
 <h3>Exercise : Let’s make a die (a vector of size 6) and roll once.</h3>
@@ -358,7 +358,7 @@ for (i in 1:5) {
   rolls[i] &lt;- sample(1:6, 1)   # Sample one number between 1 and 6 and assign it to the i-th position
 }
 rolls</code></pre>
-<pre><code>## [1] 1 6 4 4 2</code></pre>
+<pre><code>## [1] 1 1 4 5 1</code></pre>
 </div>
 <div id="formal-explanation" class="section level2">
 <h2>Formal explanation</h2>
@@ -373,7 +373,17 @@ class="section level3">
 times and record them.</h3>
 <pre class="r"><code>#
 #
-#</code></pre>
+#
+x &lt;- c(0,1)
+sample(x,1)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>rolls &lt;- rep(0,10)
+for (i in 1:10){
+  rolls[i] &lt;- sample(x,1)
+}
+
+print(rolls)</code></pre>
+<pre><code>##  [1] 0 1 1 0 1 0 0 0 1 1</code></pre>
 </div>
 </div>
 <div id="function" class="section level2">
@@ -381,20 +391,33 @@ times and record them.</h3>
 <p>Functions allow you to encapsulate reusable blocks of code and
 parameters.</p>
 <pre class="r"><code># Example: Function to calculate (a+b)^2
-square &lt;- function(a, b) {
-  value = (a + b)^2  # Calculate the square of the sum of a and b
-  return(value)      # Return the calculated value
+calc &lt;- function(a,b){
+  output &lt;- a+b
+  return(output)
+}</code></pre>
+<pre class="r"><code>calc &lt;- function(#argument for input){
+  
+  return(output) #output can be a value or a parameter 
+                  # or you don&#39;t need an output sometimes
+}</code></pre>
+<pre class="r"><code># input or output not necessary 
+greet &lt;- function(){
+  print(&quot;Hello there&quot;)
 }
-square(1,2) # Output: 9</code></pre>
-<pre><code>## [1] 9</code></pre>
-<pre class="r"><code>square(2,3) # Output: 25</code></pre>
-<pre><code>## [1] 25</code></pre>
+
+greet()</code></pre>
+<pre><code>## [1] &quot;Hello there&quot;</code></pre>
+<pre class="r"><code>greet()</code></pre>
+<pre><code>## [1] &quot;Hello there&quot;</code></pre>
+<pre class="r"><code>greet()</code></pre>
+<pre><code>## [1] &quot;Hello there&quot;</code></pre>
 <div
 id="exercise-make-a-function-to-calculate-the-multiplication-of-the-three-numbers"
 class="section level3">
 <h3>Exercise : Make a function to calculate the multiplication of the
 three numbers</h3>
-<pre class="r"><code># what should be inputs?
+<pre class="r"><code># what is your function name?
+# what should be inputs?
 # what is the output? </code></pre>
 </div>
 </div>
@@ -412,19 +435,18 @@ roll_multiple &lt;- function(runs) {
   return(rolls)
 }
 roll_multiple(5)</code></pre>
-<pre><code>## [1] 5 5 2 1 1</code></pre>
+<pre><code>## [1] 3 4 3 1 3</code></pre>
 </div>
-<div id="lets-roll-one-dice-and-show-the-output."
-class="section level2">
-<h2>Let’s roll one dice and show the output.</h2>
+<div id="lets-roll-one-die-and-show-the-output." class="section level2">
+<h2>Let’s roll one die and show the output.</h2>
 <pre class="r"><code>#Outcome from those two dice
 
-dice1 &lt;- sample(1:6, 1)
-dice2 &lt;- sample(1:6, 1)
+die1 &lt;- sample(1:6, 1)
+die2 &lt;- sample(1:6, 1)
 
-sum_of_two &lt;- dice1 + dice2
+sum_of_two &lt;- die1 + die2
 sum_of_two</code></pre>
-<pre><code>## [1] 3</code></pre>
+<pre><code>## [1] 5</code></pre>
 </div>
 <div
 id="using-for-loop-assign-outcome-of-two-dice-rolled-into-myoutcome-from-100-iterations."
@@ -441,7 +463,7 @@ for (i in 1:100){
 }
 
 head(myoutcome) # print first 6 entries</code></pre>
-<pre><code>## [1] 5 7 6 4 5 4</code></pre>
+<pre><code>## [1]  7 10  3  4  3  6</code></pre>
 </div>
 <div
 id="use-replicate-it-carries-out-repeated-tasks-in-a-more-computationally-efficient-way."
@@ -458,11 +480,11 @@ more computationally efficient way.</h2>
   return(myoutcome)
 }
 twodice_outcome() # this function works as one simulation run</code></pre>
-<pre><code>## [1] 9</code></pre>
+<pre><code>## [1] 8</code></pre>
 <pre class="r"><code>myoutcome &lt;- replicate(n=30, twodice_outcome()) # 10 runs
 myoutcome</code></pre>
-<pre><code>##  [1] 11  7  6  6  9  3  8  8  8  9  5  2  5  7  8 11 10 10  6  5 10 11  8 11  8
-## [26]  7  8  6  7  7</code></pre>
+<pre><code>##  [1]  2 10  5  2  6  9  7 11  5  9 10  5  4  7  8 10  9  8  9  8  5  6  7  9  9
+## [26]  7  8  3  2  5</code></pre>
 </div>
 <div id="calculate-probability-of-each-outcome." class="section level2">
 <h2>Calculate probability of each outcome.</h2>
@@ -473,17 +495,17 @@ for (i in 1:n){
   myoutcome[i] &lt;- twodice_outcome() # store each outcome to ith entry in myoutcome vector
 }
 myoutcome # print out myoutcome</code></pre>
-<pre><code>##  [1]  5  8  4  2 10  3  8 11  7  5  9  7  4  4  9  7  4 11  8  4  9  7  8  7  5
-## [26]  7  8  4 11  9</code></pre>
+<pre><code>##  [1]  5 10  9  7  9  9  6  7  3 10  3  7  7 11  7  8 10  9 10  5  6  7 12  8  5
+## [26] 10 12  3  4  6</code></pre>
 <pre class="r"><code>outcome_table &lt;- table(myoutcome)
 n &lt;- length(myoutcome) # this length function will count how many unique output you have. 
 prob_outcome &lt;- outcome_table/n # to calculate each probability, you divide each frequency by the total number of observation n
 prob_outcome </code></pre>
 <pre><code>## myoutcome
-##          2          3          4          5          7          8          9 
-## 0.03333333 0.03333333 0.20000000 0.10000000 0.20000000 0.16666667 0.13333333 
-##         10         11 
-## 0.03333333 0.10000000</code></pre>
+##          3          4          5          6          7          8          9 
+## 0.10000000 0.03333333 0.10000000 0.10000000 0.20000000 0.06666667 0.13333333 
+##         10         11         12 
+## 0.16666667 0.03333333 0.06666667</code></pre>
 <pre class="r"><code># replicate version (faster but little challenging)
 myoutcome &lt;- replicate(n=30, twodice_outcome())
 outcome_table &lt;- table(myoutcome)
@@ -491,10 +513,10 @@ n &lt;- length(myoutcome)
 prob_outcome &lt;- outcome_table/n
 prob_outcome </code></pre>
 <pre><code>## myoutcome
-##          2          3          4          5          6          7          8 
-## 0.03333333 0.13333333 0.03333333 0.10000000 0.10000000 0.06666667 0.20000000 
-##          9         10         11         12 
-## 0.16666667 0.03333333 0.06666667 0.06666667</code></pre>
+##          3          4          5          6          7          8          9 
+## 0.13333333 0.06666667 0.06666667 0.10000000 0.16666667 0.03333333 0.13333333 
+##         10         11         12 
+## 0.16666667 0.10000000 0.03333333</code></pre>
 <pre class="r"><code># how to ensure that it is proper probability? 
 sum(prob_outcome) # it needs to add up to 1</code></pre>
 <pre><code>## [1] 1</code></pre>
@@ -504,30 +526,30 @@ class="section level2">
 <h2>Calculate the simulated expected value of the random variable.</h2>
 <pre class="r"><code>outcome_table * prob_outcome</code></pre>
 <pre><code>## myoutcome
-##          2          3          4          5          6          7          8 
-## 0.03333333 0.53333333 0.03333333 0.30000000 0.30000000 0.13333333 1.20000000 
-##          9         10         11         12 
-## 0.83333333 0.03333333 0.13333333 0.13333333</code></pre>
+##          3          4          5          6          7          8          9 
+## 0.53333333 0.13333333 0.13333333 0.30000000 0.83333333 0.03333333 0.53333333 
+##         10         11         12 
+## 0.83333333 0.30000000 0.03333333</code></pre>
 <pre class="r"><code>names(outcome_table) # we need this</code></pre>
-<pre><code>##  [1] &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot;</code></pre>
+<pre><code>##  [1] &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot;</code></pre>
 <pre class="r"><code>values &lt;- as.numeric(names(outcome_table) ) 
 
 # or
 # values &lt;- 2:12 
 
 sum(values * prob_outcome)</code></pre>
-<pre><code>## [1] 7.133333</code></pre>
+<pre><code>## [1] 7.4</code></pre>
 <pre class="r"><code>mu_hat = sum(values * prob_outcome)
 
 mu_hat</code></pre>
-<pre><code>## [1] 7.133333</code></pre>
+<pre><code>## [1] 7.4</code></pre>
 </div>
 <div id="calculate-the-simulated-variance-of-the-random-variable."
 class="section level2">
 <h2>Calculate the simulated variance of the random variable.</h2>
 <pre class="r"><code>sigma_2_hat &lt;- sum( (values-mu_hat)^2 * prob_outcome  )
 sigma_2_hat</code></pre>
-<pre><code>## [1] 7.648889</code></pre>
+<pre><code>## [1] 7.44</code></pre>
 </div>
 <div
 id="make-a-function-that-has-an-input-n-and-a-list-of-output-that-gives-you-the-simulated-expected-value-and-variance.-putting-all-together"
@@ -563,28 +585,28 @@ output that gives you the simulated expected value and variance.
 
 sim_fn(100)</code></pre>
 <pre><code>## $mu
-## [1] 7.36
+## [1] 6.96
 ## 
 ## $sigma2
-## [1] 7.1904</code></pre>
+## [1] 5.9784</code></pre>
 <pre class="r"><code>sim_fn(1000)</code></pre>
 <pre><code>## $mu
-## [1] 7.007
+## [1] 6.968
 ## 
 ## $sigma2
-## [1] 5.882951</code></pre>
+## [1] 5.738976</code></pre>
 <pre class="r"><code>sim_fn(10000)</code></pre>
 <pre><code>## $mu
-## [1] 7.0199
+## [1] 7.0333
 ## 
 ## $sigma2
-## [1] 5.918104</code></pre>
+## [1] 5.889191</code></pre>
 <pre class="r"><code>sim_fn(100000)</code></pre>
 <pre><code>## $mu
-## [1] 6.99122
+## [1] 7.00663
 ## 
 ## $sigma2
-## [1] 5.847403</code></pre>
+## [1] 5.854686</code></pre>
 </div>
 
 

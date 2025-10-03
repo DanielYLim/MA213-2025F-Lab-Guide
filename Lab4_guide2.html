@@ -338,11 +338,11 @@ placebo &lt;- data[index]
 vaccine &lt;- data[-index]
 
 placebo</code></pre>
-<pre><code>## [1] &quot;Infection&quot;    &quot;Infection&quot;    &quot;Infection&quot;    &quot;no infection&quot; &quot;Infection&quot;   
+<pre><code>## [1] &quot;no infection&quot; &quot;no infection&quot; &quot;Infection&quot;    &quot;Infection&quot;    &quot;Infection&quot;   
 ## [6] &quot;no infection&quot;</code></pre>
 <pre class="r"><code>vaccine</code></pre>
 <pre><code>##  [1] &quot;Infection&quot;    &quot;Infection&quot;    &quot;Infection&quot;    &quot;Infection&quot;    &quot;Infection&quot;   
-##  [6] &quot;Infection&quot;    &quot;Infection&quot;    &quot;no infection&quot; &quot;no infection&quot; &quot;no infection&quot;
+##  [6] &quot;Infection&quot;    &quot;Infection&quot;    &quot;Infection&quot;    &quot;no infection&quot; &quot;no infection&quot;
 ## [11] &quot;no infection&quot; &quot;no infection&quot; &quot;no infection&quot; &quot;no infection&quot;</code></pre>
 <p>Getting the simulated contingency table</p>
 <pre class="r"><code>group &lt;- c(rep(&quot;placebo&quot;, length(placebo)), rep(&quot;vaccine&quot;, length(vaccine)))
@@ -352,13 +352,13 @@ df_table &lt;- table(df)
 df_table</code></pre>
 <pre><code>##          Outcome
 ## Group     Infection no infection
-##   placebo         4            2
-##   vaccine         7            7</code></pre>
+##   placebo         3            3
+##   vaccine         8            6</code></pre>
 <p>Get the ratio difference</p>
 <pre class="r"><code>ratio1 = df_table[3] / 6
 ratio2 = df_table[4] / 14
 ratio2-ratio1</code></pre>
-<pre><code>## [1] 0.1666667</code></pre>
+<pre><code>## [1] -0.07142857</code></pre>
 <p>Simulate them 100 times</p>
 <pre class="r"><code>sim_function&lt;-function(){
   index &lt;- sample(1:20, 6)
@@ -379,7 +379,7 @@ df &lt;- data.frame(Group = group, Outcome = outcome)
 }
 
 sim_function()</code></pre>
-<pre><code>## [1] -0.07142857</code></pre>
+<pre><code>## [1] 0.1666667</code></pre>
 <pre class="r"><code>library(ggplot2)
 rates &lt;- rep(0,100)
 
